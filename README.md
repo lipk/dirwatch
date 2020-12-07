@@ -73,7 +73,7 @@ systemctl start dirwatch
 
 ## Logs
 
-Error logs are written to syslog (`/var/lor/syslog`, most likely).
+Error logs are written to syslog (`/var/log/syslog`, most likely).
 
 # Notes
 
