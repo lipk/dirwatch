@@ -15,7 +15,7 @@ meant to be run as a systemd service.
 Checkout the git repo:
 
 ```
-git clone git@github.com/lipk/dirwatch
+git clone https://github.com/lipk/dirwatch.git
 cd dirwatch
 git submodule update --init --recursive
 ```
@@ -27,14 +27,14 @@ Build dirwatch:
 
 ```
 cd build
-cmake .
-ninja
+cmake ..
+make
 ```
 
 And install:
 
 ```
-ninja install
+make install
 ```
 
 ## Configuration

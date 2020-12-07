@@ -19,7 +19,7 @@ SET(SOURCES
     src/watch.hpp)
 
 add_compile_definitions(CONFIG_FILE_PATH="${CONFIG_DIR}/dirwatch.json")
-INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/json)
+INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/json/single_include)
 
 ADD_EXECUTABLE(dirwatch ${SOURCES})
 target_link_libraries(dirwatch audit)
