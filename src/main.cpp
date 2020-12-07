@@ -2,19 +2,17 @@
 #include <signal.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <string.h>
 
 #include <filesystem>
 #include <fstream>
 #include <memory>
-#include <set>
 #include <string>
-
-#include <json.hpp>
+#include <iostream>
 
 #include <config.hpp>
 #include <event.hpp>
 #include <util.hpp>
-#include <watch.hpp>
 
 std::shared_ptr<EventHandler> eventHandler;
 
