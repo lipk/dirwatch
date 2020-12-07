@@ -35,7 +35,7 @@ class Event
     std::vector<std::pair<std::string, std::string>> additionalPaths;
     AccessType accessType;
     long timestamp;
-    std::string uid, pid;
+    std::string uid, pid, username;
 
     Result<std::string> resolvePath(const std::string& path) const;
     Result<AccessType> resolveAction(const std::string& action) const;
@@ -50,6 +50,8 @@ public:
 
     const std::string& getUid() const;
     const std::string& getPid() const;
+    const std::string &getUserName() const;
+    
     long getTimestamp() const;
 
     bool shouldProcess() const;

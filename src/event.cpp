@@ -4,6 +4,7 @@
 #include <libaudit.h>
 #include <sstream>
 #include <string.h>
+#include <pwd.h>
 
 namespace {
 Result<std::pair<AccessType, std::string>> getAccessTypeAndPath(
@@ -165,9 +166,17 @@ bool Event::receiveRecord(int type, const Record& record)
         if (uidIt == record.params.end() || pidIt == record.params.end()) {
             return true;
         }
-
+        
         this->uid = uidIt->second;
         this->pid = pidIt->second;
+        
+        int uidInt = atoi(this->uid.c_str());
+        auto passwd = getpwuid(uidInt);
+        if (passwd == nullptr) {
+            this->username = this->uid;
+        } else {
+            this->username = passwd->pw_name;
+        }
     } else if (type == AUDIT_PATH) {
         auto nameIt = record.params.find("name");
         if (nameIt == record.params.end()) {
@@ -241,6 +250,11 @@ const std::string& Event::getPid() const
     return this->pid;
 }
 
+const std::string& Event::getUserName() const
+{
+    return this->username;
+}
+
 long Event::getTimestamp() const
 {
     return this->timestamp;
@@ -301,7 +315,7 @@ Result<> EventHandler::processEvent(const Event& event)
                                        normPath,
                                        action,
                                        event.getPid(),
-                                       event.getUid()));
+                                       event.getUserName()));
     }
 
     return NO_ERROR;
@@ -337,6 +351,7 @@ Result<> EventHandler::nextRecord()
     }
 
     std::string msgData(reply.message, reply.len);
+    std::cout << msgData << std::endl;
     RETURN_OR_SET(auto msg, Record::parse(msgData));
 
     auto ev = this->pendingEvents.find(msg.sequenceNumber);
