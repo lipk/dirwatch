@@ -1,0 +1,11 @@
+[Unit]
+Description = dirwatch
+After=network.target auditd.service
+Conflicts = auditd.service
+
+[Service]
+Type = simple
+ExecStart = /usr/local/bin/dirwatch
+
+[Install]
+WantedBy = multi-user.target

@@ -1,0 +1,8 @@
+{
+    "outputPath": "/var/log/dirwatch.log",
+    "dirs": [
+        {
+            "path": "/home/lipk/dwtest"
+        }
+    ]
+}
