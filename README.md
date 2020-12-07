@@ -26,6 +26,7 @@ system. If not, modify SYSTEMD_DIR in CMakeLists.txt accordingly.
 Build dirwatch:
 
 ```
+mkdir build
 cd build
 cmake ..
 make
@@ -89,6 +90,9 @@ will crash the program.
 
 * libaudit is rather poorly documented, so there's some guesswork involved in the
 interface. Some edge cases may not work as expected.
+
+* On some machines, certain operations (e.g. echo "stuff" > file) don't trigger any
+events in libaudit. I have absolutely no idea why.
 
 ## Design choices
 
